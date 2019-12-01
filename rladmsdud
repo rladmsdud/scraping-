@@ -1,0 +1,20 @@
+install.packages("RSlelnium")
+library(RSelenium)
+install.packages("rvest")
+library(rvest)
+remDr <- remoteDriver(
+  remoteServerAddr = "localhost",
+  port = 4444L,
+  browserName = "chrome"
+)
+
+remDr$open()
+remDr$navigate("https://www.kofia.or.kr/brd/m_96/list.do")
+item<-remDr$getPageSource()[[1]]
+item<-read_html(url_item, encoding="UTF-8")
+items<- url_item %>% html_nodes("strong.txt_vellip.tit_top") %>% html_text()
+items
+webElems <- remDr$findElements(using = "class", "frame")
+sapply(webElems, function(x){x$getElementAttribute("src")})
+
+remDr$close()
