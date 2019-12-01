@@ -15,6 +15,6 @@ item<-read_html(url_item, encoding="UTF-8")
 items<- url_item %>% html_nodes("strong.txt_vellip.tit_top") %>% html_text()
 items
 webElems <- remDr$findElements(using = "class", "frame")
-sapply(webElems, function(x){x$getElementAttribute("src")})
+sapply(webElems, function(x){x$getElementAttribute("scope")})
 
 remDr$close()
